@@ -13,12 +13,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
 public class Login extends AppCompatActivity {
+
     // Declare the EditText fields for user input (email and password)
     private EditText emailEditText, passwordEditText;
 
@@ -28,12 +31,15 @@ public class Login extends AppCompatActivity {
 
     // Declare a FirebaseAuth object to handle authentication
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login); // Set the layout for the activity
+
         // Initialize the FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
+
         // Link the UI elements (EditText and Button) with the corresponding views in the layout
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
@@ -132,25 +138,30 @@ public class Login extends AppCompatActivity {
 
     // This method validates that the email and password inputs are not empty
     private boolean validateInputs(String email, String password) {
-            // Regular expression for valid email pattern
-            String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
-            // Regular expression for a strong password pattern
-            String passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*_-]).{8,}$";
-            // Check if email matches the valid pattern
-            if (!email.matches(emailPattern)) {
-                Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-            // Check if password is empty
-            if (TextUtils.isEmpty(password)) {
-                Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-            // Check if password matches the strong password pattern
-            if (!password.matches(passwordPattern)) {
-                Toast.makeText(this, "Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*_-)", Toast.LENGTH_LONG).show();
-                return false;
-            }
+        // Regular expression for valid email pattern
+        String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+
+        // Regular expression for a strong password pattern
+        String passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*_-]).{8,}$";
+
+        // Check if email matches the valid pattern
+        if (!email.matches(emailPattern)) {
+            Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // Check if password is empty
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        // Check if password matches the strong password pattern
+        if (!password.matches(passwordPattern)) {
+            Toast.makeText(this, "Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*_-)", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
         // Both email and password are valid
         return true;
     }
