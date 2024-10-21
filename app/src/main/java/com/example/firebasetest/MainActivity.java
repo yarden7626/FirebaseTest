@@ -12,10 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
-
-import org.w3c.dom.Text;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +30,19 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         TextView tv = findViewById(R.id.helloText);
-        tv.setText("Hello + " +mAuth.getCurrentUser().getEmail());
+
+        // Check if a user is logged in
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            // User is signed in, display the email
+            tv.setText("Hello, " + user.getEmail());
+        } else {
+            // No user is signed in, redirect to Login activity
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
+            finish();
+            return; // Exit the method to prevent further execution
+        }
 
         Button btnLogout = findViewById(R.id.logoutButton);
         btnLogout.setOnClickListener(new View.OnClickListener() {

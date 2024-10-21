@@ -96,9 +96,11 @@ public class Login extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign-up successful, get the newly created user
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Intent intent = new Intent(Login.this, MainActivity.class);
-                                startActivity(intent);
-                                finish(); // Close the login activity
+                                if (user != null) {
+                                    Intent intent = new Intent(Login.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish(); // Close the login activity
+                                }
                             } else {
                                 // Sign-up failed, show the error message
                                 Toast.makeText(Login.this, "Sign Up Failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -124,9 +126,11 @@ public class Login extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Login successful, get the currently signed-in user
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Intent intent = new Intent(Login.this, MainActivity.class);
-                                startActivity(intent);
-                                finish(); // Close the login activity
+                                if (user != null) {
+                                    Intent intent = new Intent(Login.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish(); // Close the login activity
+                                }
                             } else {
                                 // Login failed, show the error message
                                 Toast.makeText(Login.this, "Login Failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
