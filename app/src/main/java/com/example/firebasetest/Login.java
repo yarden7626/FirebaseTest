@@ -145,9 +145,6 @@ public class Login extends AppCompatActivity {
         // Regular expression for valid email pattern
         String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
 
-        // Regular expression for a strong password pattern
-        String passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*_-]).{8,}$";
-
         // Check if email matches the valid pattern
         if (!email.matches(emailPattern)) {
             Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
@@ -160,13 +157,8 @@ public class Login extends AppCompatActivity {
             return false;
         }
 
-        // Check if password matches the strong password pattern
-        if (!password.matches(passwordPattern)) {
-            Toast.makeText(this, "Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*_-)", Toast.LENGTH_LONG).show();
-            return false;
-        }
-
         // Both email and password are valid
         return true;
     }
+
 }
